@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="contain">
+        <div class="jumbotron pb-1">
+
+            <div class="container">
+                <div class="row shadow-lg p-3 mb-5 rounded">
+                    <h1 class="display-5 col-sm-6 ">Poke Trivia</h1>
+                    <h2 id="displayTimer" class="display-5 col-sm-6"><span id="countdowntimer">15</span>s Left</h2>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <br><br><br>
+                    <div id="instructions" class="col-sm-12">You will be told the name of a Pokemon. You will have 15
+                        seconds to click the
+                        appropriate Pokemon picture.
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <Div class="col-sm-4"></Div>
+                    <Div id="begin" type="button" class="col-sm-4 shadow-lg p-3 mb-5 bg-dark rounded text-light">Click
+                        me to Begin</Div>
+                    <Div class="col-sm-4"></Div>
+
+                </div>
+                <div class="row">
+
+
+                    <Div id="questionText" class="col-sm-12"></Div>
+
+
+
+                </div>
+            </div>
+            <br><br>
+            <div class="container">
+
+                <div id="row1" class="row ">
+                    <div  id="crystal1" class="col-sm-3">
+                        <img id="pic1" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                    </div>
+                    <div  id="crystal2" class="col-sm-3">
+                        <img id="pic2" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail" data-index="2">
+
+                    </div>
+                    <div id="crystal3" class="col-sm-3">
+                        <img id="pic3" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                    </div>
+                    <div id="crystal4" class="col-sm-3">
+                        <img  id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                    </div>
+
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+    <!--jumboend-->
+
+
+    <script>
+
+        //create var array of images of 20 pokemon
+        //var for wins and losses to display at end
+        //size images the same 
+        //create an array of questions
+        //create a start element to click start timer after click.
+        // create an object with start, win, lose and reset functions
+        // design a way to display random picture answer with corresponding question to random element
+        // fill remaining elements with random pictures
+        //win(on click of picture with value matching question) display remove question and display gif you win video
+        //reset should reset clock and forward to next question
+        // lose 
+
+
+
+        onload = function () {
+
+            $("#begin").on("click", triviaGame.begin);
+
+            $(".img-thumbnail").on("click", triviaGame.answerCheck);
+
+        }
+        var timeleft = 15;
+
+
+
+
+        var questions = ["Find Bulbosaur", "Find Charmander", "Find Squirtle", "Find Pikachu"]
+        var questionOrder = 0
+        var correct = 0;
+        var wrong = 0;
+
+
+
+        var triviaGame = {
+            begin: function () {
+
+                //hides my begin page text
+                $("#begin").hide("slow", function () {
+                });
+                $("#instructions").hide("slow", function () {
+                });
+
+
+                //after every win, loss or timeUp
+                triviaGame.nextQuestion();
+            },
+
+            nextQuestion: function () {
+                //writes text of question every iteration
+                $("#questionText").html("<h1 class= inplayQuestion>" + questions[questionOrder] + "</h1>")
+                //randomNumber identifies one of four image elements in my html
+
+                var randomNumber = Math.floor(Math.random() * 4 + 1);
+            
+                console.log(randomNumber)
+                var arrayPictures = ["assets/images/bulb.jpg",
+                "assets/images/char.png",
+                "assets/images/squirtle.jpg",
+                "assets/images/pika.jpg",
+                "assets/images/dragonn.jpg",
+                "assets/images/fox.jpg",
+                "assets/images/gggffg.jpg",
+                "assets/images/other.jpg",
+                "assets/images/1.jpg",
+                "assets/images/2.jpg"];
+
+                //"post picture associated with the question we're on"
+              
+
+
+
+                // im trying to loop through and fill every other picture element that is not the 
+                for (k = 1; k <= 4; k++) {
+                    j = Math.floor(Math.random() * 5 + 4);
+                    //
+                    if (k !== randomNumber) {
+                        $("#pic" + k).attr("src", arrayPictures[j]);
+                    }
+
+                }
+                console.log (randomNumber);
+                $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
+                  timeleft = 100;
+                downloadTimer = setInterval(function () {
+                    timeleft--;
+                    document.getElementById("countdowntimer").textContent = timeleft;
+                    if (timeleft <= 0) {
+                        clearInterval(downloadTimer)
+
+                        triviaGame.timeUp();
+
+                    }
+                }, 1000);
+
+
+            },
+            timeUp: function () {
+                triviaGame.hideDisplay();
+                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Time is Up!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                    "<img id=timeUpGif1 src= https://media.giphy.com/media/l46CffyjCEPhIhi7K/giphy.gif>" + "</p>")
+                wrong++
+                questionOrder++
+                if (questionOrder > 3) {
+                    $(".timeUp").remove()
+                    triviaGame.endGame();
+                } else {
+                    setTimeout(function () { triviaGame.showDisplay() }, 3000);
+                    setTimeout(function () { $(".timeUp").remove() }, 3000);
+
+                    setTimeout(function () { triviaGame.nextQuestion() }, 3000);
+
+                }
+            },
+            hideDisplay: function () {
+
+                $(".container").hide("slow", function () {
+
+                });
+            },
+
+
+            showDisplay: function () {
+                $(".container").show("slow", function () {
+
+                });
+            },
+            correctClick: function () {
+                triviaGame.hideDisplay();
+                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are correct!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                    "<img src= https://gph.is/1JksT3z>" + "</p>");
+                setTimeout(function () { $(".timeUp").remove() }, 3000);
+                questionOrder++
+                if (questionOrder === 5) {
+                    triviaGame.endGame();
+                }
+                correct++
+                triviaGame.showDisplay();
+                triviaGame.nextQuestion();
+
+
+
+            },
+
+            wrongClick: function () {
+                triviaGame.hideDisplay();
+                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Incorrect!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                    "<img src= https://gph.is/1JksT3z>" + "</p>");
+                setTimeout(function () { $(".timeUp").remove() }, 3000);
+                questionOrder++
+                if (questionOrder === 5) {
+                    triviaGame.endGame();
+                }
+                wrong++
+                triviaGame.showDisplay();
+                triviaGame.nextQuestion();
+
+            },
+            endGame: function () {
+                triviaGame.hideDisplay();
+                $(".jumbotron").append("<h1 class='timeUpGif shadow-lg rounded' id=timeUpGif> You've completed the Poke Trivia</h1>" + "<h3 class= timeUpGif> You got " + correct + " answers correct!</h3>" + "<h3 class=timeUpGif> You got " + wrong + " answers wrong!</h3>" + "<p class=timeUp id=timeUpGif >" +
+                    "<img id=endGameGif src= https://media.giphy.com/media/AFdcYElkoNAUE/giphy.gif>" + "</p>");
+
+            },
+            answerCheck: function() {
+                // i want to check to see that if the image clicked = the image for the question if so run correct if not run wrong
+                if (this.src===arrayPictures[questionOrder]) 
+                {
+                    alert('yes')
+                }
+          
+           }
+
+            
+        }
+
+
+    </script>
+
+</body>
+
+</html>
