@@ -57,17 +57,17 @@
             <div class="container">
 
                 <div id="row1" class="row ">
-                    <div  id="crystal1" class="col-sm-3">
+                    <div  id="crystal1" class="col-sm-3 crystal1">
                         <img id="pic1" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
-                    <div  id="crystal2" class="col-sm-3">
+                    <div  id="crystal1" class="col-sm-3 crystal1">
                         <img id="pic2" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail" data-index="2">
 
                     </div>
-                    <div id="crystal3" class="col-sm-3">
+                    <div id="crystal1" class="col-sm-3 crystal1">
                         <img id="pic3" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
-                    <div id="crystal4" class="col-sm-3">
+                    <div id="crystal1" class="col-sm-3 crystal1">
                         <img  id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
 
@@ -119,8 +119,10 @@
 
         var triviaGame = {
             begin: function () {
-
+                $(".crystal1").show();
+                $("#questionText").show();
                 //hides my begin page text
+
                 $("#begin").hide("slow", function () {
                 });
                 $("#instructions").hide("slow", function () {
@@ -268,8 +270,13 @@
                     setTimeout(function () { $(".timeUpGif").remove() }, 3000);
                     setTimeout(function () { $("#endGameGif").remove() }, 3000);
                     setTimeout(function () {  triviaGame.showDisplay() }, 3000);
+                    $(".crystal1").hide();
+                    $("#questionText").hide();
+                    $("#begin").text("Click me to play again!")
+                    $("#begin").show("slow", function () {
+                });
                     
-                    setTimeout(function () { triviaGame.begin() }, 3000);
+                  
                     
             },
             answerCheck: function() {
