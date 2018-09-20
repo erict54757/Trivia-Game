@@ -71,6 +71,11 @@ body {
         padding-bottom: 0;
         border-radius: 5%;
     }
+
+    #correctGif{
+        width: 90%;
+        border-radius: 5%;
+    }
    
 @media screen and (max-width: 640px) {
 
