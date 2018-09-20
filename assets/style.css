@@ -16,14 +16,17 @@ body {
         text-align: center;
 
     }
+    #displayHeading {
+        text-align: center;
+    }
     #begin {
-        background-color:  #126b72;
+       
         border-radius: 10px;
         text-align: center;
         
     }
     #displayTimer {
-       text-align: right;
+       text-align: center;
     }
 
 
@@ -40,6 +43,7 @@ body {
     border-style: solid;
     border-width: 10px 10px 10px 10px;
     border-radius: 20px;
+    
     opacity: .95;
 }
 #timeUpGif {
@@ -73,8 +77,8 @@ body {
     }
     #timeUpGif1 {
        
-        height: 30%;
-        width: 30%;
+        width: 80%;
+        height: auto;
         margin-bottom: 0;
         padding-bottom: 0;
         border-radius: 5%;
@@ -90,6 +94,7 @@ body {
         border-style: solid;
         border-color: #212529;
         border-width: 7px;
+        
     }
    
 @media screen and (max-width: 640px) {
@@ -98,7 +103,23 @@ body {  background-attachment: fixed;
     
 }
 
+#timeUpGif1 {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15%;
+    align-self: center;
+}
+#endGameGif {
+    width: 100%;
+    height: auto;
 
+
+}
+#correctGif{
+    width: 100%;
+    height: auto;
+    margin-bottom: 15%;
+}
 
 #contain {
     margin-left: 5%;
@@ -113,7 +134,8 @@ body {  background-attachment: fixed;
 }
 
 .crystal1 {
-   width: 25%;
+   width: 43%;
+   padding-bottom: 3%;
 
    
   

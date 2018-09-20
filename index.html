@@ -22,9 +22,9 @@
         <div class="jumbotron pb-3">
 
             <div class="container">
-                <div class="row shadow-lg p-3 mb-4 rounded">
-                    <h1 class="display-5 col-sm-6 ">Poke Trivia</h1>
-                    <h2 id="displayTimer" class="display-5 col-sm-6"><span id="countdowntimer">15</span>s Left</h2>
+                <div class="row shadow-lg p-3 mb-4 bg-light rounded justify-content-center">
+                    <h1 id="displayHeading" class="display-5 col-sm-6">Poke Trivia</h1>
+                    <h2 id="displayTimer" class="display-5 col-sm-6 shadow-lg rounded bg-white"><span id="countdowntimer">15</span>s Left</h2>
                 </div>
             </div>
             <div class="container">
@@ -53,22 +53,22 @@
 
                 </div>
             </div>
-            <br><br>
+            <br>
             <div class="container">
 
-                <div id="row1" class="row ">
+                <div id="row1" class="row justify-content-center">
                     <div id="crystal1" class="col-sm-3 crystal1">
-                        <img id="pic1" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                        <img id="pic1" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail shadow">
                     </div>
                     <div id="crystal1" class="col-sm-3 crystal1">
-                        <img id="pic2" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail" data-index="2">
+                        <img id="pic2" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail shadow" data-index="2">
 
                     </div>
                     <div id="crystal1" class="col-sm-3 crystal1">
-                        <img id="pic3" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                        <img id="pic3" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail shadow">
                     </div>
                     <div id="crystal1" class="col-sm-3 crystal1">
-                        <img id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                        <img id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail shadow">
                     </div>
 
                 </div>
@@ -127,7 +127,7 @@
                 });
                 $("#instructions").hide("fast", function () {
                 });
-
+                $("#displayTimer").show();
 
                 //after every win, loss or timeUp
                 triviaGame.nextQuestion();
@@ -192,7 +192,7 @@
 
                     console.log(randomNumber);
                     $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
-                    timeleft = 15;
+                    timeleft = 2;
                     downloadTimer = setInterval(function () {
                         timeleft--;
                         document.getElementById("countdowntimer").textContent = timeleft;
@@ -211,7 +211,7 @@
                 timeUp: function () {
                     triviaGame.hideDisplay();
                     $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Time is Up!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                        "<img id=timeUpGif1 src= https://media.giphy.com/media/l46CffyjCEPhIhi7K/giphy.gif>" + "</p>")
+                        "<img class=shadow-lg  id=timeUpGif1 src= https://media.giphy.com/media/566uPTbU3nAvS/giphy.gif>" + "</p>")
                     wrong++
                     questionOrder++
                     if (questionOrder > 3) {
@@ -241,7 +241,7 @@
                 correctClick: function () {
                     triviaGame.hideDisplay();
                     $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are correct!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                        "<img id=correctGif src= https://media.giphy.com/media/xuXzcHMkuwvf2/giphy.gif>" + "</p>")
+                        "<img class=shadow-lg id=correctGif src= https://media.giphy.com/media/xuXzcHMkuwvf2/giphy.gif>" + "</p>")
                     clearInterval(downloadTimer);
                     setTimeout(function () { $(".timeUp").remove() }, 3000);
                     questionOrder++
@@ -262,7 +262,7 @@
                 wrongClick: function () {
                     triviaGame.hideDisplay();
                     $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are wrong!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                        "<img id=correctGif src= https://media.giphy.com/media/ch1pcRhEb0c1y/giphy.gif>" + "</p>")
+                        "<img class=shadow-lg id=correctGif src= https://media.giphy.com/media/ch1pcRhEb0c1y/giphy.gif>" + "</p>")
                     clearInterval(downloadTimer)
                     setTimeout(function () { $(".timeUp").remove() }, 3000);
                     questionOrder++
@@ -285,9 +285,10 @@
 
                     triviaGame.hideDisplay();
                     clearInterval(downloadTimer);
+                    $("#displayTimer").hide();
 
                     $(".jumbotron").append("<h1 class='timeUpGif shadow-lg rounded' id=timeUpGif> You've completed the Poke Trivia</h1>" + "<h3 class= timeUpGif> You got " + correct + " answers correct!</h3>" + "<h3 class=timeUpGif> You got " + wrong + " answers wrong!</h3>" + "<p class=timeUp id=timeUpGif >" +
-                        "<img id='endGameGif' src= https://media.giphy.com/media/AFdcYElkoNAUE/giphy.gif>" + "</p>");
+                        "<img class=shadow-lg id='endGameGif' src= https://media.giphy.com/media/AFdcYElkoNAUE/giphy.gif>" + "</p>");
                     correct = 0
                     wrong = 0
                     questionOrder = 0
@@ -298,6 +299,7 @@
                     $("#questionText").hide();
                     $("#begin").text("Click me to play again!")
                     $("#begin").show("slow", function () {
+                      
                     });
 
 
