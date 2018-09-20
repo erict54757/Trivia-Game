@@ -57,10 +57,10 @@
             <div class="container">
 
                 <div id="row1" class="row ">
-                    <div  id="crystal1" class="col-sm-3 crystal1">
+                    <div id="crystal1" class="col-sm-3 crystal1">
                         <img id="pic1" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
-                    <div  id="crystal1" class="col-sm-3 crystal1">
+                    <div id="crystal1" class="col-sm-3 crystal1">
                         <img id="pic2" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail" data-index="2">
 
                     </div>
@@ -68,14 +68,14 @@
                         <img id="pic3" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
                     <div id="crystal1" class="col-sm-3 crystal1">
-                        <img  id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
+                        <img id="pic4" src="assets/images/pokequestion.jpg" alt="..." class="img-thumbnail">
                     </div>
 
                 </div>
             </div>
 
 
-            
+
         </div>
     </div>
     <!--jumboend-->
@@ -105,7 +105,7 @@
 
         }
         var timeleft = 15;
-        var downloadTimer= downloadTimer;
+        var downloadTimer = downloadTimer;
 
 
 
@@ -115,7 +115,7 @@
         var correct = 0;
         var wrong = 0;
         var arrayPictures;
-       
+
 
         var triviaGame = {
             begin: function () {
@@ -139,163 +139,185 @@
                 //randomNumber identifies one of four image elements in my html
 
                 var randomNumber = Math.floor(Math.random() * 4 + 1);
-            
+
                 console.log(randomNumber)
-                 arrayPictures = ["https://github.com/erict54757/Trivia-Game/blob/master/assets/images/bulb.jpg?raw=true",
-                "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/char.jpg?raw=true",
-                "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/squirtle.jpg?raw=true",
-                "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/pika.jpg?raw=true",
-                "assets/images/dragonn.jpg",
-                "assets/images/fox.jpg",
-                "assets/images/gggffg.jpg",
-                "assets/images/other.jpg",
-                "assets/images/1.jpg",
-                "assets/images/2.jpg"];
+                arrayPictures = ["https://github.com/erict54757/Trivia-Game/blob/master/assets/images/bulb.jpg?raw=true",
+                    "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/char.jpg?raw=true",
+                    "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/squirtle.jpg?raw=true",
+                    "https://github.com/erict54757/Trivia-Game/blob/master/assets/images/pika.jpg?raw=true",
+                    "assets/images/dragonn.jpg",
+                    "assets/images/fox.jpg",
+                    "assets/images/gggffg.jpg",
+                    "assets/images/other.jpg",
+                    "assets/images/1.jpg",
+                    "assets/images/2.jpg"];
 
                 //"post picture associated with the question we're on"
-              
 
 
+                var numArray = [];
+                function duplicateCheck() {
+                    if (numArray.indexOf(j) < 0) {
+                        numArray.push(j);
+                    }
+                    else {
+                        console.log("duplicate")
+                        j = Math.floor(Math.random() * 6 + k);
+                        if (numArray.indexOf(j) < 0) {
+                            numArray.push(j);
 
-                // im trying to loop through and fill every other picture element that is not the 
+                        }
+                        else {
+                            duplicateCheck();
+                        }
+                    }
+                }
+
+                // im trying to loop through and fill every other picture element that is not the
+
                 for (k = 1; k <= 4; k++) {
                     j = Math.floor(Math.random() * 6 + k);
+
+                    duplicateCheck();
                     //
-                    if (k !== randomNumber && j!==questionOrder){
-                        
+                    console.log("j: " + j)
+                    if (k !== randomNumber && j !== questionOrder) {
+
                         $("#pic" + k).attr("src", arrayPictures[j]);
                     }
+                    }
 
-                }
-                
-                console.log (randomNumber);
-                $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
-                  timeleft = 15;
-                downloadTimer = setInterval(function () {
-                    timeleft--;
-                    document.getElementById("countdowntimer").textContent = timeleft;
-                    if (timeleft <= 0) {
-                        clearInterval(downloadTimer)
+                  
 
-                        triviaGame.timeUp();
+
+                    console.log(randomNumber);
+                    $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
+                    timeleft = 15;
+                    downloadTimer = setInterval(function () {
+                        timeleft--;
+                        document.getElementById("countdowntimer").textContent = timeleft;
+                        if (timeleft <= 0) {
+                            clearInterval(downloadTimer)
+
+                            triviaGame.timeUp();
+
+                        }
+
+                    }, 1000);
+
+
+
+                },
+                timeUp: function () {
+                    triviaGame.hideDisplay();
+                    $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Time is Up!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                        "<img id=timeUpGif1 src= https://media.giphy.com/media/l46CffyjCEPhIhi7K/giphy.gif>" + "</p>")
+                    wrong++
+                    questionOrder++
+                    if (questionOrder > 3) {
+                        $(".timeUp").remove()
+                        triviaGame.endGame();
+                    } else {
+                        setTimeout(function () { triviaGame.showDisplay() }, 3000);
+                        setTimeout(function () { $(".timeUp").remove() }, 3000);
+
+                        setTimeout(function () { triviaGame.nextQuestion() }, 3000);
 
                     }
-                   
-                }, 1000);
-              
+                },
+                hideDisplay: function () {
+
+                    $(".container").hide("fast", function () {
+
+                    });
+                },
 
 
-            },
-            timeUp: function () {
-                triviaGame.hideDisplay();
-                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Time is Up!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                    "<img id=timeUpGif1 src= https://media.giphy.com/media/l46CffyjCEPhIhi7K/giphy.gif>" + "</p>")
-                wrong++
-                questionOrder++
-                if (questionOrder > 3) {
-                    $(".timeUp").remove()
-                    triviaGame.endGame();
-                } else {
-                    setTimeout(function () { triviaGame.showDisplay() }, 3000);
-                    setTimeout(function () { $(".timeUp").remove() }, 3000);
+                showDisplay: function () {
+                    $(".container").show("fast", function () {
 
-                    setTimeout(function () { triviaGame.nextQuestion() }, 3000);
-
-                }
-            },
-            hideDisplay: function () {
-
-                $(".container").hide("fast", function () {
-
-                });
-            },
-
-
-            showDisplay: function () {
-                $(".container").show("fast", function () {
-
-                });
-            },
-            correctClick: function () {
-                triviaGame.hideDisplay();
-                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are correct!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                    "<img id=correctGif src= https://media.giphy.com/media/xuXzcHMkuwvf2/giphy.gif>" + "</p>")
+                    });
+                },
+                correctClick: function () {
+                    triviaGame.hideDisplay();
+                    $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are correct!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                        "<img id=correctGif src= https://media.giphy.com/media/xuXzcHMkuwvf2/giphy.gif>" + "</p>")
                     clearInterval(downloadTimer);
-                setTimeout(function () { $(".timeUp").remove() }, 3000);
-                questionOrder++
-                if (questionOrder >3) {
-                    
-                    correct++
+                    setTimeout(function () { $(".timeUp").remove() }, 3000);
+                    questionOrder++
+                    if (questionOrder > 3) {
+
+                        correct++
+                        clearInterval(downloadTimer)
+                        setTimeout(function () { triviaGame.endGame() }, 3000);
+                    } else {
+                        correct++
+                        setTimeout(function () { triviaGame.showDisplay() }, 3000);
+                        setTimeout(function () { triviaGame.nextQuestion() }, 3000);
+
+                    }
+
+                },
+
+                wrongClick: function () {
+                    triviaGame.hideDisplay();
+                    $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are wrong!</h1>" + "<p class=timeUp id=timeUpGif >" +
+                        "<img id=correctGif src= https://media.giphy.com/media/ch1pcRhEb0c1y/giphy.gif>" + "</p>")
                     clearInterval(downloadTimer)
-                    setTimeout(function () {  triviaGame.endGame() }, 3000);
-                }else{
-                correct++
-                setTimeout(function () {  triviaGame.showDisplay() }, 3000);
-                setTimeout(function () {  triviaGame.nextQuestion() }, 3000);
+                    setTimeout(function () { $(".timeUp").remove() }, 3000);
+                    questionOrder++
+                    if (questionOrder > 3) {
+                        wrong++
 
-                }
+                        clearInterval(downloadTimer);
 
-            },
+                        setTimeout(function () { triviaGame.endGame() }, 3000);
 
-            wrongClick: function () {
-                triviaGame.hideDisplay();
-                $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> You are wrong!</h1>" + "<p class=timeUp id=timeUpGif >" +
-                    "<img id=correctGif src= https://media.giphy.com/media/ch1pcRhEb0c1y/giphy.gif>" + "</p>")
-                    clearInterval(downloadTimer)
-                setTimeout(function () { $(".timeUp").remove() }, 3000);
-                questionOrder++
-                if (questionOrder >3) {
-                    wrong++
-                    
-                      clearInterval(downloadTimer);
+                    } else {
+                        wrong++
+                        setTimeout(function () { triviaGame.showDisplay() }, 3000);
+                        setTimeout(function () { triviaGame.nextQuestion() }, 3000);
+                    }
 
-                    setTimeout(function () {  triviaGame.endGame()}, 3000);
+                },
+                endGame: function () {
 
-                }else{
-                wrong++
-                setTimeout(function () { triviaGame.showDisplay() }, 3000);
-                setTimeout(function () {  triviaGame.nextQuestion() }, 3000);
-                }
 
-            },
-            endGame: function () {
-                
-            
-                 triviaGame.hideDisplay(); 
-                 clearInterval(downloadTimer);
-               
-                $(".jumbotron").append("<h1 class='timeUpGif shadow-lg rounded' id=timeUpGif> You've completed the Poke Trivia</h1>" + "<h3 class= timeUpGif> You got " + correct + " answers correct!</h3>" + "<h3 class=timeUpGif> You got " + wrong + " answers wrong!</h3>" + "<p class=timeUp id=timeUpGif >" +
-                    "<img id='endGameGif' src= https://media.giphy.com/media/AFdcYElkoNAUE/giphy.gif>" + "</p>");
-                    correct=0
-                    wrong=0
-                    questionOrder=0
+                    triviaGame.hideDisplay();
+                    clearInterval(downloadTimer);
+
+                    $(".jumbotron").append("<h1 class='timeUpGif shadow-lg rounded' id=timeUpGif> You've completed the Poke Trivia</h1>" + "<h3 class= timeUpGif> You got " + correct + " answers correct!</h3>" + "<h3 class=timeUpGif> You got " + wrong + " answers wrong!</h3>" + "<p class=timeUp id=timeUpGif >" +
+                        "<img id='endGameGif' src= https://media.giphy.com/media/AFdcYElkoNAUE/giphy.gif>" + "</p>");
+                    correct = 0
+                    wrong = 0
+                    questionOrder = 0
                     setTimeout(function () { $(".timeUpGif").remove() }, 3000);
                     setTimeout(function () { $("#endGameGif").remove() }, 3000);
-                    setTimeout(function () {  triviaGame.showDisplay() }, 3000);
+                    setTimeout(function () { triviaGame.showDisplay() }, 3000);
                     $(".crystal1").hide();
                     $("#questionText").hide();
                     $("#begin").text("Click me to play again!")
                     $("#begin").show("slow", function () {
-                });
-                    
-                  
-                    
-            },
-            answerCheck: function() {
-                console.log("yo")
-                // i want to check to see that if the image clicked = the image for the question if so run correct if not run wrong
-                console.log (this.src)
-                console.log (arrayPictures[questionOrder])
-             if (this.src ===arrayPictures[questionOrder]){
-                
-                 triviaGame.correctClick();
-                }else { triviaGame.wrongClick()}
-          
-           }
-        }
+                    });
 
-            
-        
+
+
+                },
+                answerCheck: function() {
+                    console.log("yo")
+                    // i want to check to see that if the image clicked = the image for the question if so run correct if not run wrong
+                    console.log(this.src)
+                    console.log(arrayPictures[questionOrder])
+                    if (this.src === arrayPictures[questionOrder]) {
+
+                        triviaGame.correctClick();
+                    } else { triviaGame.wrongClick() }
+
+                }
+            }
+
+
+
 
 
     </script>
