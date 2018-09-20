@@ -51,8 +51,8 @@ body {
 }
 
 #endGameGif {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
     border-radius: 5%;
 }
 
@@ -73,7 +73,8 @@ body {
     }
 
     #correctGif{
-        width: 90%;
+        width: 60%;
+        height: 60%;
         border-radius: 5%;
     }
    
