@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 
     <title>Document</title>
 </head>
@@ -24,13 +25,13 @@
             <div class="container">
                 <div  id="header" class="row shadow-lg p-3  bg-light rounded justify-content-center">
                     <h1 id="displayHeading" class="display-5 col-md-6">Poke Trivia</h1>
-                    <h2 id="displayTimer" class="display-5 col-md-6 shadow-lg rounded bg-white"><span id="countdowntimer">15</span>s Left</h2>
+                    <h2 id="displayTimer" class="display-5 col-md-6 shadow-lg rounded bg-white"><span id="countdowntimer">10</span>s Left</h2>
                 </div>
             </div>
             <div class="container">
                 <div class="row justify-content-center">
                     <br>
-                    <div id="instructions" class="col-sm-12">You will be told the name of a Pokemon. You will have 15
+                    <div id="instructions" class="col-sm-12">You will be told the name of a Pokemon. You will have 10
                         seconds to click the
                         appropriate Pokemon picture.
                     </div>
@@ -102,9 +103,9 @@
             $("#begin").on("click", triviaGame.begin);
 
             $(".img-thumbnail").on("click", triviaGame.answerCheck);
-
+          
         }
-        var timeleft = 15;
+        var timeleft = 10;
         var downloadTimer = downloadTimer;
 
 
@@ -115,10 +116,13 @@
         var correct = 0;
         var wrong = 0;
         var arrayPictures;
-
+        var sounds = ["assets/Images/sound1.mp3", "assets/Images/fast1.wav"];
+        $.playSound(sounds[0]);
 
         var triviaGame = {
             begin: function () {
+                $.playSound(sounds[0]);
+                
                 $(".crystal1").show();
                 $("#questionText").show();
                 //hides my begin page text
@@ -137,7 +141,7 @@
                 //writes text of question every iteration
                 $("#questionText").html("<h2 class= inplayQuestion>" + questions[questionOrder] + "</h2>")
                 //randomNumber identifies one of four image elements in my html
-
+                
                 var randomNumber = Math.floor(Math.random() * 4 + 1);
 
                 console.log(randomNumber)
@@ -192,7 +196,7 @@
 
                     console.log(randomNumber);
                     $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
-                    timeleft = 15;
+                    timeleft = 10;
                     downloadTimer = setInterval(function () {
                         timeleft--;
                         document.getElementById("countdowntimer").textContent = timeleft;
@@ -210,6 +214,7 @@
                 },
                 timeUp: function () {
                     triviaGame.hideDisplay();
+                    $.playSound(sounds[1]);
                     $(".jumbotron").append("<h1 class=timeUp id=timeUpGif> Time is Up!</h1>" + "<p class=timeUp id=timeUpGif >" +
                         "<img class=shadow-lg  id=timeUpGif1 src= https://media.giphy.com/media/566uPTbU3nAvS/giphy.gif>" + "</p>")
                     wrong++
@@ -282,7 +287,7 @@
                 },
                 endGame: function () {
 
-
+                     $.playSound(sounds[0]);
                     triviaGame.hideDisplay();
                     clearInterval(downloadTimer);
                     $("#displayTimer").hide();
