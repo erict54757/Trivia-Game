@@ -27,6 +27,8 @@ body {
     }
     #displayTimer {
        text-align: center;
+       line-height: 3;
+    
     }
 
 
@@ -134,7 +136,7 @@ body {  background-attachment: fixed;
 }
 
 .crystal1 {
-   width: 50%;
+   width: 45%;
   padding-bottom: 3%;
 
    
