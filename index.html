@@ -175,10 +175,6 @@
                     }
                 }
 
-
-
-
-                console.log(randomNumber);
                 $("#pic" + randomNumber).attr("src", arrayPictures[questionOrder]);
                 timeleft = 10;
                 downloadTimer = setInterval(function () {
@@ -192,8 +188,6 @@
                     }
 
                 }, 1000);
-
-
 
             },
             timeUp: function () {
