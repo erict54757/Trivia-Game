@@ -18,6 +18,7 @@ body {
     }
     #displayHeading {
         text-align: center;
+        line-height: 2.5;
     }
     #begin {
        
@@ -29,6 +30,9 @@ body {
        text-align: center;
        line-height: 3;
     
+    }
+    #header{
+        margin-bottom: 5%;
     }
 
 
@@ -98,11 +102,24 @@ body {
         border-width: 7px;
         
     }
+    @media screen and (max-width: 960px) {
+        
+        #displayTimer{
+            line-height: 2;
+        }
+        #displayHeading {
+            line-height: 1;
+        }
+    }
    
 @media screen and (max-width: 640px) {
 
 body {  background-attachment: fixed;
     
+}
+
+#header{
+    margin-bottom: 0;
 }
 
 #timeUpGif1 {
