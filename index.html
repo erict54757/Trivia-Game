@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
     <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
-    
+
     <title>Trivia Game</title>
 </head>
 
@@ -96,17 +96,12 @@
         }
         var timeleft = 10;
         var downloadTimer = downloadTimer;
-
-
-
-
         var questions = ["Find Bulbosaur", "Find Charmander", "Find Squirtle", "Find Pikachu"]
         var questionOrder = 0
         var correct = 0;
         var wrong = 0;
         var arrayPictures;
         var sounds = ["assets/Images/sound1.mp3", "assets/Images/fast1.wav"];
-
 
         var triviaGame = {
             begin: function () {
