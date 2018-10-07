@@ -1,1 +1,1 @@
-![image of blah blah] (assets/images/char.jpg)
+![image of blah blah] (https://github.com/erict54757/Trivia-Game/blob/master/assets/images/char.jpg)
